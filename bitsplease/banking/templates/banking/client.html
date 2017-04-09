@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Open Accounts</h1>
+
+    {% if accounts %}
+    <ul>
+
+      {% for acc in accounts %}
+      <li class="">
+        <a href="{% url 'banking:acc-detail' acc.iban %}">{{acc.iban}}</a> ({{ acc.balance }} {{ acc.currency}})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>There are no accounts opened.</p>
+    {% endif %}
+{% endblock %}
