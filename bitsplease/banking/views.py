@@ -29,6 +29,7 @@ def my_view(request):
         return customer_view(request)
     elif user.user_type == user.BANKER:
         return banker_view(request)
+    return customer_view(request)
 
 def index(request):
     """

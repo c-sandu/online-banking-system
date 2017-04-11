@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
+    url(r'^', include('banking.urls', namespace="banking")),
     url(r'^banking/', include('banking.urls', namespace="banking")),
     url('^accounts/', include('django.contrib.auth.urls')),
     url(r'^admin/', admin.site.urls),

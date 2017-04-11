@@ -4,14 +4,25 @@
     <h1>Open Accounts</h1>
 
     {% if accounts %}
-    <ul>
+    <table style="width:400px">
+      <tr class="">
+        <th>IBAN</td>
+        <th>Account type</th>
+        <th>Account balance</th>
+      </tr>
 
       {% for acc in accounts %}
-      <li class="">
-        <a href="{% url 'banking:acc-detail' acc.iban %}">{{acc.iban}}</a> ({{ acc.balance }} {{ acc.currency}})
-      </li>
+      <tr class="">
+        <td>{{acc.iban}}</td>
+        <td>{% if acc.acc_type == 'CUR'%}
+        Current
+        {% else %}
+        Savings
+        {% endif %}</td>
+        <td>({{ acc.balance }} {{ acc.currency}})</td>
+      </tr>
       {% endfor %}
-    </ul>
+    </table>
 
     {% else %}
       <p>There are no accounts opened.</p>
