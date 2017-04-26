@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>ISBN: {{ account.isbn }}</h1>
+
+  <p><strong>Owner:</strong> <a href="">{{ account.owner__username }}</a></p> <!-- client detail link not yet defined -->
+  <p><strong>Account type:</strong> {{ account.acc_type }}</p>
+  <p><strong>Balance:</strong> {{ account.balance }}</p>
+  <p><strong>Currency:</strong> {{ account.currency }}</p>
+  <p><strong>Created at:</strong> {{ account.date_creation }}</p>
+  <p><strong>Touched at:</strong> {{ account.date_last_touch }}</p>
+
+{% endblock %}

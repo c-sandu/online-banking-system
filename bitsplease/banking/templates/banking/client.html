@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Open Accounts</h1>
+
+    {% if accounts %}
+    <table style="width:400px">
+      <tr class="">
+        <th>IBAN</td>
+        <th>Account type</th>
+        <th>Account balance</th>
+      </tr>
+
+      {% for acc in accounts %}
+      <tr class="">
+        <td>{{acc.iban}}</td>
+        <td>{% if acc.acc_type == 'CUR'%}
+        Current
+        {% else %}
+        Savings
+        {% endif %}</td>
+        <td>({{ acc.balance }} {{ acc.currency}})</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    {% else %}
+      <p>There are no accounts opened.</p>
+    {% endif %}
+{% endblock %}
