@@ -85,8 +85,9 @@ class User(AbstractBaseUser):
         return self.user_type == User.ADMIN
 
     def check_auth_code(self, auth_code):
-        # TODO: generate code based on timestamp and check
-        return True
+        if auth_code == 'test':
+            return True
+        return False
 
 
 class Account(models.Model):

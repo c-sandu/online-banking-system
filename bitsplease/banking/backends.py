@@ -4,19 +4,17 @@ class UserAuth(object):
 
     def authenticate(self, username=None, password=None, auth_code=None):
         try:
-            user = User.objects.get(pk=username)
+            user = User.objects.get(username=username)
             if user.check_password(password):
-                if user.check_auth_code(auth_code):
-                    return user
+                return user
         except User.DoesNotExist:
             return None
 
-    def get_user(self, username):
+    def get_user(self, user_id):
         try:
-            user = CustomUser.objects.get(pk=username)
+            user = User.objects.get(pk=user_id)
             if user.is_active:
                 return user
             return None
-        except:
-            User.DoesNotExist:
+        except User.DoesNotExist:
             return None

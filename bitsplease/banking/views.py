@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 
 from .models import User, Account, Transaction
 
@@ -21,10 +22,10 @@ def banker_view(request):
     return render(request, 'banking/banker.html', context)
 
 
-def login(request):
+"""def login(request):
     context = {}
     context.update(csrf(request))
-    return render(request, 'banking/login.html', context)
+    return render(request, 'banking/login.html', context)"""
 
 def auth_view(request):
     username = request.POST.get('username', '')
@@ -42,7 +43,7 @@ def auth_view(request):
 
 
 
-#@login_required
+@login_required
 def my_view(request):
     user = request.user
     if user.user_type == user.CUSTOMER:

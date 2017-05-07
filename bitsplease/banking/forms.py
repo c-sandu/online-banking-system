@@ -1,9 +1,15 @@
 from django.contrib.auth.forms import AuthenticationForm
 
 from django import forms
+from banking.models import User
 
 class LoginForm(AuthenticationForm):
-    def __init__(self, *args, **kwargs):
-        super(LoginForm, self).__init__(*args, **kwargs)
+    auth_code = forms.CharField()
 
-        ceva = forms.CharField(label = 'anal', max_length=40)
+    def confirm_login_allowed(self, user):
+        auth_code = self.request.POST['auth_code']
+        if not user.check_auth_code(auth_code):
+            raise forms.ValidationError(
+                "This account is inactive.",
+                code='inactive',
+            )
