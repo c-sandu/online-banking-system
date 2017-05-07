@@ -25,7 +25,11 @@
           <li><a href="{% url 'banking:index' %}">Home</a></li>
           {% if user.is_authenticated %}
             <li>User: {{ user.get_username }}</li>
-            <li><a href="{% url 'banking:my_view' %}">Accounts</a></li>
+            <li><a href="{% url 'banking:my_view' %}"> {% if user.user_type == 'BNK' %}
+                                                        Users
+                                                       {% else %}
+                                                        Accounts
+                                                       {% endif %}</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}
             <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
