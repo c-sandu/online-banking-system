@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Users</h1>
+
+    {% if users %}
+    <table style="width:400px">
+      <tr class="">
+        <th>Nume</td>
+        <th>User type</th>
+        <th>username</th>
+        <th>auth_seed</th>
+        <th>created</th>
+        <th>updated</th>
+      </tr>
+
+      {% for user in users %}
+      <tr class="">
+        <td>{{ user.name }}</td>
+        <td>{{ user.user_type }}</td>
+        <td> <a href="{% url 'banking:user-detail' user.username %}"> {{user.username}}</a></td>
+        <td>{{ user.auth_seed }}</td>
+        <td>{{ user.created }}</td>
+        <td>{{ user.updated }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    {% else %}
+      <p>There are no clients.</p>
+    {% endif %}
+{% endblock %}

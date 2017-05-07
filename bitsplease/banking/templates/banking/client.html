@@ -13,7 +13,7 @@
 
       {% for acc in accounts %}
       <tr class="">
-        <td>{{acc.iban}}</td>
+        <td> <a href="{% url 'banking:acc-detail' acc.iban %}"> {{acc.iban}}</a></td>
         <td>{% if acc.acc_type == 'CUR'%}
         Current
         {% else %}
