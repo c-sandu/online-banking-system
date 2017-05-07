@@ -100,7 +100,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+################################ AUTH ################################
+
 AUTH_USER_MODEL = 'banking.User'
+
+AUTHENTICATION_BACKENDS = ('banking.backends.UserAuth',)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

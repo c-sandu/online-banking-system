@@ -21,6 +21,26 @@ def banker_view(request):
     return render(request, 'banking/banker.html', context)
 
 
+def login(request):
+    context = {}
+    context.update(csrf(request))
+    return render(request, 'banking/login.html', context)
+
+def auth_view(request):
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    auth_code = request.POST.get('auth_code', '')
+
+    user = auth.authenticate(username=username, password=password, auth_code=auth_code)
+
+    if user is not None:
+        auth.login(request, user)
+        return HttpResponseRedirect('/accounts/login')
+    else:
+        return None
+
+
+
 
 #@login_required
 def my_view(request):

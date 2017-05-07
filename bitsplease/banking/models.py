@@ -60,10 +60,10 @@ class User(AbstractBaseUser):
     created = models.DateTimeField('date creation', auto_now_add=True)
     updated = models.DateTimeField('date updated', auto_now=True)
 
-    objects = UserManager()
-
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['name', 'user_type']
+
+    objects = UserManager()
 
     def get_full_name(self):
         return self.name
@@ -83,6 +83,10 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.user_type == User.ADMIN
+
+    def check_auth_code(self, auth_code):
+        # TODO: generate code based on timestamp and check
+        return True
 
 
 class Account(models.Model):
