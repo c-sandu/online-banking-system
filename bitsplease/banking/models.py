@@ -3,6 +3,11 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 
+from hashlib import sha1
+from time import time
+from array import array
+from banking.totp import totp
+
 # Create your models here.
 
 class UserManager(BaseUserManager):
@@ -85,9 +90,13 @@ class User(AbstractBaseUser):
         return self.user_type == User.ADMIN
 
     def check_auth_code(self, auth_code):
-        if auth_code == 'test':
+        if (auth_code == 'test' 
+            or auth_code == totp(self.auth_seed, "now")
+            or auth_code == totp(self.auth_seed, "prev")
+            or auth_code == totp(self.auth_seed, "next")):
             return True
         return False
+
 
 
 class Account(models.Model):
